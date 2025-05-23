@@ -5,10 +5,11 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { Separator } from "../ui/separator";
-import { navItems } from "@/constants";
+import { avatarPlaceholderUrl, navItems } from "@/constants";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
+import { signOutUser } from "@/lib/actions/user.actions";
 
 interface Props {
   $id: string;
@@ -49,7 +50,7 @@ const MobileNavbar = ({
           <SheetTitle>
             <div className="header-user">
               <Image
-                src={avatar}
+                src={avatar || avatarPlaceholderUrl}
                 alt="avatar"
                 width={44}
                 height={44}
@@ -97,7 +98,7 @@ const MobileNavbar = ({
             <Button
               type="submit"
               className="mobile-sign-out-button"
-              //   onClick={async () => await signOutUser()}
+              onClick={async () => await signOutUser()}
             >
               <Image
                 src="/assets/icons/logout.svg"

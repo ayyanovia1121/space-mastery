@@ -2,10 +2,14 @@ import React from "react";
 import SearchingBar from "./searching-bar";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import { signOutUser } from "@/lib/actions/user.actions";
 
-type Props = {};
+interface Props {
+  userId: string;
+  accountId: string;
+}
 
-const Header = (props: Props) => {
+const Header = ({ userId, accountId }: Props) => {
   return (
     <header className="header">
       <SearchingBar />
@@ -14,14 +18,12 @@ const Header = (props: Props) => {
             <FileUploader ownerId={userId} accountId={accountId} />
         */}
         FILE UPLOADER
-
         <form
-        //TODO: SignOut
-        //   action={async () => {
-        //     "use server";
+          action={async () => {
+            "use server";
 
-        //     await signOutUser();
-        //   }}
+            await signOutUser();
+          }}
         >
           <Button type="submit" className="sign-out-button">
             <Image
