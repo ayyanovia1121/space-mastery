@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,18 +18,23 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { createAccount } from "@/lib/actions/user.actions";
+import OtpModal from "./otp-modal";
 
 type FormType = "sign-up" | "sign-in";
 
-const authFormSchema = (formType: FormType) => z.object({
-  email: z.string().email(),
-  fullName: formType === "sign-up" ? z.string().min(2).max(50) : z.string().optional(),
-})
-  
+const authFormSchema = (formType: FormType) =>
+  z.object({
+    email: z.string().email(),
+    fullName:
+      formType === "sign-up"
+        ? z.string().min(2).max(50)
+        : z.string().optional(),
+  });
 
 const AuthForm = ({ type }: { type: FormType }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [accountId, setAccountId] = useState(null);
 
   const formSchema = authFormSchema(type);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,9 +55,10 @@ const AuthForm = ({ type }: { type: FormType }) => {
         fullName: values.fullName || "",
         email: values.email,
       });
+      setAccountId(user.accountId);
     } catch (error) {
       setErrorMessage("Failed to create account. Please try again.");
-    }finally{
+    } finally {
       setIsLoading(false);
     }
   };
@@ -141,6 +146,9 @@ const AuthForm = ({ type }: { type: FormType }) => {
           </div>
         </form>
       </Form>
+      {accountId && (
+        <OtpModal accountId={accountId} email={form.getValues("email")} />
+      )}
     </>
   );
 };
