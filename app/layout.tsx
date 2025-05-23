@@ -8,8 +8,9 @@ const poppins  = Poppins({
   variable: '--font-poppins',
  })
 export const metadata: Metadata = {
-  title: "Space Mastery",
-  description: "Space Mastery App",
+  title: "Clouvia- Built to Keep & Ready to Access",
+  description:
+    "Clouvia lets you save, manage, and find your files fast — all in one place",
 };
 
 export default function RootLayout({
