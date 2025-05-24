@@ -3,6 +3,7 @@ import SearchingBar from "./searching-bar";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { signOutUser } from "@/lib/actions/user.actions";
+import FileUploader from "./file-uploader";
 
 interface Props {
   userId: string;
@@ -14,10 +15,7 @@ const Header = ({ userId, accountId }: Props) => {
     <header className="header">
       <SearchingBar />
       <div className="header-wrapper">
-        {/* //TODO: FileUploader
-            <FileUploader ownerId={userId} accountId={accountId} />
-        */}
-        FILE UPLOADER
+        <FileUploader ownerId={userId} accountId={accountId} />
         <form
           action={async () => {
             "use server";

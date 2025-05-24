@@ -10,6 +10,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { signOutUser } from "@/lib/actions/user.actions";
+import FileUploader from "./file-uploader";
 
 interface Props {
   $id: string;
@@ -20,7 +21,7 @@ interface Props {
 }
 
 const MobileNavbar = ({
-  $id = "",
+  $id: ownerId,
   accountId,
   fullName,
   avatar,
@@ -91,9 +92,7 @@ const MobileNavbar = ({
           </nav>
           <Separator className="my-5 bg-light-200/20" />
           <div className="flex flex-col justify-between gap-5 pb-5">
-            {/* //TODO: add file uploader
             <FileUploader ownerId={ownerId} accountId={accountId} />
-             */}
             UPLOAD FILE
             <Button
               type="submit"
