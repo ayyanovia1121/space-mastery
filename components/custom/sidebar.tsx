@@ -31,6 +31,7 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
           width={52}
           height={52}
           className="lg:hidden"
+          priority
         />
       </Link>
       <nav className="sidebar-nav">
